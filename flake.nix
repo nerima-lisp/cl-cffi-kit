@@ -53,6 +53,13 @@
         license = nixpkgs.lib.licenses.mit;
       };
 
+      lispDependencies = ctx: [
+        (cl-nix-forge.lib.${ctx.system}.fromNixpkgsLisp {
+          drv = nixpkgs.legacyPackages.${ctx.system}.sbclPackages.cffi;
+          lispImplementation = "sbcl";
+        })
+      ];
+
       lispCheckDependencies = ctx: [ cl-weave.packages.${ctx.system}.cl-weave ];
 
       docs.root = ./docs;

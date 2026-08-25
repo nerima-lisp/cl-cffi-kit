@@ -17,5 +17,6 @@ sbcl --script run-tests.lisp
 expects a sibling `../cl-weave/` checkout (the test system's only
 dependency; see `cl-cffi-kit.asd`).
 
-There is no foreign-function tooling to use yet — see the
-[roadmap](project/roadmap.md).
+The package depends on [CFFI](https://cffi.common-lisp.dev/) and provides
+cleanup-safe allocation scopes plus common error-code handling. See the
+[API reference](reference/api.md).

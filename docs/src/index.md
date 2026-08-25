@@ -5,7 +5,7 @@ this org's C-binding repositories.
 
 ## Status
 
-This repository is provisioning only: the GitHub repo, CI, Cachix cache, and
-documentation site exist, but no toolkit code has been written yet. See
-the [roadmap](project/roadmap.md) for what implementing one requires and
-the open design question it starts from.
+The package is implemented on top of CFFI and provides cleanup-safe foreign
+memory/string scopes plus consistent foreign-call error handling. See the
+[API reference](reference/api.md) and [roadmap](project/roadmap.md) for the
+current scope and future extensions.

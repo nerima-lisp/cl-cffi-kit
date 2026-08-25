@@ -5,8 +5,9 @@
 [![Documentation](https://img.shields.io/badge/docs-MkDocs%20Material-0a7a5a)](https://nerima-lisp.github.io/cl-cffi-kit/)
 
 Common Lisp toolkit for safer, more ergonomic foreign-function usage,
-targeting SBCL. Provisioning only today: no toolkit code is implemented
-yet — see [docs/src/project/roadmap.md](docs/src/project/roadmap.md).
+provided on top of the portable [CFFI](https://cffi.common-lisp.dev/)
+library. It includes cleanup-safe allocation scopes and consistent foreign
+call error handling.
 
 Full documentation is published at <https://nerima-lisp.github.io/cl-cffi-kit/>.
 The source for that site lives in [docs/src/](docs/src/).
