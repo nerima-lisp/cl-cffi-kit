@@ -34,7 +34,7 @@
       # `nix build`/`nix flake check` work on the aarch64-darwin dev machine
       # too -- this reverts PACKAGE_STANDARD.md's 2026-08-01 Linux-only
       # decision the same way every other current sibling repo already has
-      # (cl-codec-kit, cl-nyancat, cl-prolog-kit, cl-dataflow-kit).
+      # (cl-codec-kit, cl-nyancat, cl-prolog, cl-dataflow).
       systems = [
         "x86_64-linux"
         "aarch64-darwin"
