@@ -40,9 +40,10 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Getting started: getting-started.md
+  - Getting Started: getting-started.md
   - Reference:
       - API: reference/api.md
+      - Conditions: reference/conditions.md
   - Project:
       - Roadmap: project/roadmap.md
 

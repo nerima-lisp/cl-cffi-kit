@@ -19,4 +19,4 @@ dependency; see `cl-cffi-kit.asd`).
 
 The package depends on [CFFI](https://cffi.common-lisp.dev/) and provides
 cleanup-safe allocation scopes plus common error-code handling. See the
-[API reference](reference/api.md).
+[API reference](reference/api.md) and [Conditions](reference/conditions.md).
