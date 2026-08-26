@@ -5,8 +5,10 @@
   :description "Common Lisp toolkit for safer, more ergonomic CFFI foreign-function usage"
   :long-description "cl-cffi-kit provides cleanup-safe foreign-memory and
 foreign-string scopes, direct CFFI memory helpers, and a consistent condition
-for checking foreign return codes. It is a small portability layer for
-Common Lisp code that calls C libraries through CFFI."
+for checking foreign return codes. Every scope is a CALL-WITH-* function in
+continuation-passing style; the WITH-* macros are thin sugar over them. It is
+a small portability layer for Common Lisp code that calls C libraries
+through CFFI."
   :author "takeokunn <bararararatty@gmail.com>"
   :maintainer "takeokunn <bararararatty@gmail.com>"
   :license "MIT"
@@ -20,7 +22,10 @@ Common Lisp code that calls C libraries through CFFI."
   :components
   ((:file "package")
    (:file "conditions")
-   (:file "core"))
+   (:file "version")
+   (:file "memory")
+   (:file "strings")
+   (:file "errors"))
   :in-order-to ((test-op (test-op "cl-cffi-kit/test"))))
 
 (defsystem "cl-cffi-kit/test"
@@ -37,7 +42,11 @@ Common Lisp code that calls C libraries through CFFI."
   :serial t
   :components
   ((:file "package")
-   (:file "core-test"))
+   (:file "helpers-matchers")
+   (:file "version-test")
+   (:file "memory-test")
+   (:file "strings-test")
+   (:file "errors-test"))
   :perform (test-op (operation component)
              (declare (ignore operation component))
              (unless (funcall (symbol-function (find-symbol "RUN-TESTS" "CL-CFFI-KIT/TEST")))
