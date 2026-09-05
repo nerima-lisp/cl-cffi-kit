@@ -8,7 +8,7 @@ Common Lisp toolkit for safer, more ergonomic foreign-function usage,
 provided on top of the portable [CFFI](https://cffi.common-lisp.dev/)
 library. It includes cleanup-safe allocation scopes and consistent foreign
 call error handling. Every scope is a `call-with-*` function in
-continuation-passing style; the `with-*` macros are thin sugar over them.
+continuation-passing style; the `with-*` macros expand to calls to them.
 
 Full documentation is published at <https://nerima-lisp.github.io/cl-cffi-kit/>.
 The source for that site lives in [docs/src/](docs/src/).

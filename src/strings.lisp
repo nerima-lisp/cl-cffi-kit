@@ -1,4 +1,3 @@
-;;;; src/strings.lisp
 (in-package #:cl-cffi-kit)
 
 (defun call-with-foreign-string (string thunk &rest options)
@@ -10,11 +9,7 @@ forwarded to CFFI:FOREIGN-STRING-ALLOC."
       (foreign-string-free pointer))))
 
 (defun %expand-with-foreign-string (name string options body)
-  "Return WITH-FOREIGN-STRING's expansion for the given syntax pieces. Kept
-apart from the DEFMACRO body so this expansion logic runs as an ordinary,
-individually testable and coverage-trackable function; SBCL's code-coverage
-instrumentation cannot see inside a macro's own body, since that body runs
-once at expansion time rather than as part of the instrumented program."
+  "Return WITH-FOREIGN-STRING's expansion for the given syntax pieces."
   `(call-with-foreign-string ,string (lambda (,name) ,@body) ,@options))
 
 (defmacro with-foreign-string ((name string &rest options) &body body)
@@ -23,7 +18,7 @@ STRING that is freed on every exit path, including a non-local one.
 
 NAME is a binding form and is not evaluated; STRING and OPTIONS are
 evaluated, and OPTIONS is forwarded verbatim to CALL-WITH-FOREIGN-STRING
-(and, through it, to CFFI:FOREIGN-STRING-ALLOC). Pure sugar over
+(and, through it, to CFFI:FOREIGN-STRING-ALLOC). It expands to
 CALL-WITH-FOREIGN-STRING:
 
   (with-foreign-string (ptr \"hello\")

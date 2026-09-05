@@ -6,8 +6,8 @@ portable primitives useful across foreign-function bindings.
 ## Current scope
 
 - `call-with-foreign-object`/`call-with-foreign-objects`/`call-with-foreign-string`,
-  each in continuation-passing style, with the `with-*` macros as pure sugar
-  over them
+  each in continuation-passing style; the `with-*` macros expand to calls to
+  them
 - Re-exported CFFI allocation, freeing, slot, and string operations
 - `check-foreign-error`, `with-checked-foreign-call`, and `foreign-call-error`
 - Nix/ASDF integration, executable tests, mutation testing, property-based

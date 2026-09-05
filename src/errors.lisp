@@ -1,4 +1,3 @@
-;;;; src/errors.lisp
 (in-package #:cl-cffi-kit)
 
 (defun check-foreign-error (function code &key (success 0))
@@ -8,12 +7,7 @@
       (error 'foreign-call-error :function function :code code)))
 
 (defun %expand-with-checked-foreign-call (call-form success)
-  "Return WITH-CHECKED-FOREIGN-CALL's expansion for the given syntax
-pieces. Kept apart from the DEFMACRO body so this expansion logic runs as
-an ordinary, individually testable and coverage-trackable function; SBCL's
-code-coverage instrumentation cannot see inside a macro's own body, since
-that body runs once at expansion time rather than as part of the
-instrumented program."
+  "Return WITH-CHECKED-FOREIGN-CALL's expansion for the given syntax pieces."
   `(check-foreign-error ',(first call-form) ,call-form :success ,success))
 
 (defmacro with-checked-foreign-call (call-form &key (success 0))

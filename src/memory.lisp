@@ -1,4 +1,3 @@
-;;;; src/memory.lisp
 (in-package #:cl-cffi-kit)
 
 (defun call-with-foreign-object (type count thunk)
@@ -12,12 +11,7 @@ still applies wherever WITH-FOREIGN-OBJECT expands directly to it."
     (funcall thunk pointer)))
 
 (defun %expand-with-foreign-object (name type count body)
-  "Return WITH-FOREIGN-OBJECT's expansion for the given syntax pieces.
-Kept apart from the DEFMACRO body so this expansion logic runs as an
-ordinary, individually testable and coverage-trackable function; SBCL's
-code-coverage instrumentation cannot see inside a macro's own body, since
-that body runs once at expansion time rather than as part of the
-instrumented program."
+  "Return WITH-FOREIGN-OBJECT's expansion for the given syntax pieces."
   `(call-with-foreign-object ,type ,count (lambda (,name) ,@body)))
 
 (defmacro with-foreign-object ((name type &optional (count 1)) &body body)
@@ -51,9 +45,7 @@ this without macro-expansion-time knowledge of how many pointers there are."
     (recurse bindings '())))
 
 (defun %expand-with-foreign-objects (bindings body)
-  "Return WITH-FOREIGN-OBJECTS's expansion for the given syntax pieces. See
-%EXPAND-WITH-FOREIGN-OBJECT for why this logic is a function, not inline in
-the DEFMACRO body."
+  "Return WITH-FOREIGN-OBJECTS's expansion for the given syntax pieces."
   `(call-with-foreign-objects
     (list ,@(mapcar (lambda (binding)
                        (destructuring-bind (name type &optional (count 1)) binding
@@ -67,8 +59,8 @@ the DEFMACRO body."
 foreign object that is freed on every exit path, including a non-local one.
 
 BINDINGS is a list of (NAME TYPE &optional COUNT) forms; each NAME is a
-binding form and is not evaluated, while TYPE and COUNT are evaluated. Pure
-sugar over CALL-WITH-FOREIGN-OBJECTS:
+binding form and is not evaluated, while TYPE and COUNT are evaluated. It
+expands to CALL-WITH-FOREIGN-OBJECTS:
 
   (with-foreign-objects ((a :int) (b :double 2))
     ...)

@@ -1,17 +1,8 @@
-;;;; run-tests.lisp
-;;;;
-;;;; Bootstrap script: register this checkout's and cl-weave's ASDF
-;;;; definitions, enable SBCL coverage instrumentation for the system under
-;;;; test, bound the per-test timeout, and run the test system without
-;;;; scanning every inherited source registry tree.
-
 (require :asdf)
 (format t "tests: bootstrap~%")
 
-;; Two separate top-level forms, not one PROGN: LOAD reads a whole form
-;; before evaluating it, so a single PROGN would try to read the
-;; SB-COVER:STORE-COVERAGE-DATA symbol before REQUIRE has created that
-;; package.
+;; Keep REQUIRE separate so the SB-COVER package exists before the declaration
+;; is read.
 #+sbcl (require :sb-cover)
 #+sbcl (proclaim '(optimize sb-cover:store-coverage-data))
 
@@ -28,8 +19,7 @@
   (push (merge-pathnames #P"../cl-weave/" root) asdf:*central-registry*)
   (format t "tests: load~%")
   (asdf:load-system "cl-cffi-kit/test")
-  ;; Bound here, not in T/PACKAGE.LISP: CL-WEAVE only exists in the image
-  ;; once ASDF:LOAD-SYSTEM above has pulled it in as a dependency.
+  ;; CL-WEAVE is available only after the test system has loaded.
   (setf (symbol-value (find-symbol "*DEFAULT-TIMEOUT-MS*" "CL-WEAVE")) 20000)
   (format t "tests: run~%")
   (unless (funcall (find-symbol "RUN-TESTS" "CL-CFFI-KIT/TEST"))

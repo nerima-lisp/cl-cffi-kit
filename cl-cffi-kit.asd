@@ -6,7 +6,7 @@
   :long-description "cl-cffi-kit provides cleanup-safe foreign-memory and
 foreign-string scopes, direct CFFI memory helpers, and a consistent condition
 for checking foreign return codes. Every scope is a CALL-WITH-* function in
-continuation-passing style; the WITH-* macros are thin sugar over them. It is
+continuation-passing style; the WITH-* macros expand to calls to them. It is
 a small portability layer for Common Lisp code that calls C libraries
 through CFFI."
   :author "takeokunn <bararararatty@gmail.com>"

@@ -1,8 +1,8 @@
 # API reference
 
 Every scope in this library is a `call-with-*` function in continuation-passing
-style. The matching `with-*` macro is pure sugar that builds a call to it; see
-each macro's expansion example below.
+style. The matching `with-*` macro expands to a call to it; see each macro's
+expansion example below.
 
 ## Version
 
@@ -63,7 +63,7 @@ See also: [`with-foreign-object`](#with-foreign-object)
 ```
 
 Bind `name` to a foreign object of `type` (`count` elements, default 1) for
-the extent of `body`, freeing it on every exit path. Pure sugar over
+the extent of `body`, freeing it on every exit path. It expands to
 `call-with-foreign-object`.
 
 **Returns**: `body`'s value.
@@ -119,7 +119,7 @@ See also: [`with-foreign-objects`](#with-foreign-objects)
 
 Bind each `(name type &optional count)` form in `bindings` to a freshly
 allocated foreign object for the extent of `body`, freeing all of them on
-every exit path. Pure sugar over `call-with-foreign-objects`.
+every exit path. It expands to `call-with-foreign-objects`.
 
 **Returns**: `body`'s value.
 
@@ -188,7 +188,7 @@ See also: [`with-foreign-string`](#with-foreign-string)
 
 Bind `name` to a nul-terminated foreign copy of `string` for the extent of
 `body`, freeing it on every exit path. `options` is forwarded verbatim to
-`call-with-foreign-string`. Pure sugar over `call-with-foreign-string`.
+`call-with-foreign-string`. It expands to `call-with-foreign-string`.
 
 **Returns**: `body`'s value.
 

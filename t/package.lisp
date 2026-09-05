@@ -1,4 +1,3 @@
-;;;; t/package.lisp
 (defpackage #:cl-cffi-kit/test
   (:use #:cl)
   (:shadowing-import-from #:cl-weave #:describe)
@@ -22,24 +21,8 @@
 
 (in-package #:cl-cffi-kit/test)
 
-;; SB-COVER cannot see inside a DEFMACRO form: a macro's body runs once, at
-;; the calling code's compile time, not as part of the instrumented program
-;; SB-COVER tracks at run time. Verified directly against this system's own
-;; coverage HTML report: every DEFMACRO form here -- lambda list, docstring,
-;; and body alike -- is permanently marked "not executed" regardless of how
-;; many times the macro is used, while the CALL-WITH-* functions the macros
-;; expand into (and the %EXPAND-WITH-* functions that build those
-;; expansions, kept separate from the DEFMACRO bodies for exactly this
-;; reason) are tracked normally. The same applies to DEFPACKAGE, IN-PACKAGE,
-;; DEFPARAMETER, and DEFINE-CONDITION top-level forms, which execute once at
-;; load time outside any instrumented function. A macro-forward,
-;; declaration-heavy library like this one therefore has a expression-
-;; coverage ceiling well under TEST_STANDARD.md's 90% target through no
-;; fault of test thoroughness. Branch coverage is unaffected by this ceiling
-;; -- every branch SB-COVER can see (all of it inside ordinary functions) is
-;; covered -- so 90% is enforced there, and expression coverage is enforced
-;; at this codebase's measured, evidence-based ceiling instead of silently
-;; dropped.
+;; Macro expansion helpers are ordinary functions so SB-COVER can instrument
+;; and test the expansion logic.
 (defun run-tests (&key (reporter :spec))
   (unless (run-all :reporter reporter
                     :coverage t

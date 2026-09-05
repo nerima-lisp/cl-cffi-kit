@@ -8,6 +8,6 @@ this org's C-binding repositories.
 The package is implemented on top of CFFI and provides cleanup-safe foreign
 memory/string scopes plus consistent foreign-call error handling. Every scope
 is a `call-with-*` function in continuation-passing style; the `with-*`
-macros are thin sugar over them. See the [API reference](reference/api.md),
+macros expand to calls to them. See the [API reference](reference/api.md),
 [Conditions](reference/conditions.md), and [roadmap](project/roadmap.md) for
 the current scope and future extensions.
